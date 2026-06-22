@@ -1,5 +1,7 @@
 <p align="center">
-  <img src="assets/icon.png" width="128" height="128" alt="ela app icon — a blue έ">
+  <img src="assets/icon.png" width="120" height="120" alt="ela app icon (light)">
+  &nbsp;&nbsp;
+  <img src="assets/icon-dark.png" width="120" height="120" alt="ela app icon (dark)">
 </p>
 
 # ela — Greek accents, typed for you

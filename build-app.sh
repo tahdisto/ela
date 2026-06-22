@@ -17,15 +17,14 @@ cp app/Info.plist            "$CONTENTS/Info.plist"
 cp data/model/lexicon.bin    "$CONTENTS/Resources/model/"
 cp data/model/homographs.bin "$CONTENTS/Resources/model/"
 
-echo "→ rendering base icon and compiling asset catalog"
-rm -rf build/icon.xcassets && mkdir -p build
-swift scripts/make_icon.swift build/icon.xcassets >/dev/null
-xcrun actool --app-icon AppIcon \
+echo "→ building Icon Composer .icon and compiling it (light/dark/tinted)"
+rm -rf build/AppIcon.icon && mkdir -p build
+swift scripts/make_icon.swift build/AppIcon.icon >/dev/null
+xcrun actool build/AppIcon.icon --app-icon AppIcon \
   --compile "$CONTENTS/Resources" \
   --platform macosx --minimum-deployment-target 26.0 \
-  --output-partial-info-plist build/icon-partial.plist \
-  build/icon.xcassets >/dev/null 2>&1
-# -> writes AppIcon.icns + Assets.car (with light/dark theme variants) into Resources
+  --output-partial-info-plist build/icon-partial.plist >/dev/null 2>&1
+# -> writes AppIcon.icns + Assets.car (Aqua + DarkAqua + Tintable) into Resources
 
 # Sign with a real identity when available so the Accessibility grant survives
 # rebuilds (designated requirement = identifier + cert, not the ad-hoc cdhash).
