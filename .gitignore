@@ -3,9 +3,10 @@
 *.o
 *.swiftmodule
 
-# App bundle + icon build intermediates
+# App bundle + icon/dmg build intermediates
 ela.app/
 build/
+*.dmg
 
 # Large raw corpora (download via scripts/build_model.py)
 data/raw/

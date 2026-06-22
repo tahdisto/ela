@@ -52,12 +52,27 @@ It even fixes itself: if the start of a sentence was ambiguous, ela re-reads the
 
 ## Install
 
-Requires **macOS 26 (Tahoe)** and Xcode command-line tools.
+Requires **macOS 26 (Tahoe)**, Apple Silicon.
+
+### Download (.dmg)
+
+Grab the latest **`ela-x.y.z.dmg`** from the
+[Releases](https://github.com/tahdisto/ela/releases) page, open it, and drag
+**ela** onto **Applications**.
+
+> The app isn’t notarized yet, so on first launch macOS may say it’s from an
+> unidentified developer. Right-click `ela` → **Open** → **Open** once, and
+> you’re set.
+
+### Build from source
+
+Needs the Xcode command-line tools.
 
 ```bash
 git clone https://github.com/tahdisto/ela.git
 cd ela
 ./build-app.sh          # builds ela.app (signed with your local identity)
+./make-dmg.sh           # optional: builds a drag-to-install ela-x.y.z.dmg
 open ela.app
 ```
 
