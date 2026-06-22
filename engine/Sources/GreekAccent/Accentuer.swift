@@ -8,10 +8,16 @@ final class UserModel: Codable {
     var left:  [String: [String: [String: Double]]] = [:]  // key -> prevKey -> form -> count
     var right: [String: [String: [String: Double]]] = [:]  // key -> form -> nextKey -> count
 
+    /// Per-(context, form) cap so repeating the same phrase can't snowball and
+    /// override a clear corpus signal — learning nudges, it doesn't dominate.
+    static let cap = 2.0
+
+    private func add(_ v: inout Double, _ w: Double) { v = min(Self.cap, v + w) }
+
     func bump(key: String, form: String, prevKey: String, nextKey: String, by w: Double = 1) {
-        prior[key, default: [:]][form, default: 0] += w
-        left[key, default: [:]][prevKey, default: [:]][form, default: 0] += w
-        right[key, default: [:]][form, default: [:]][nextKey, default: 0] += w
+        add(&prior[key, default: [:]][form, default: 0], w)
+        add(&left[key, default: [:]][prevKey, default: [:]][form, default: 0], w)
+        add(&right[key, default: [:]][form, default: [:]][nextKey, default: 0], w)
     }
 
     func reset() { prior = [:]; left = [:]; right = [:] }
@@ -24,7 +30,7 @@ public struct Weights {
     public var left:  Double = 4.0
     public var right: Double = 4.0
     public var alpha: Double = 0.5      // additive smoothing
-    public var userWeight: Double = 6.0 // each user observation counts this much
+    public var userWeight: Double = 3.0 // weight of a (capped) user observation
     public init() {}
 }
 
