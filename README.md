@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/icon.png" width="128" height="128" alt="ela app icon — a blue έ">
+</p>
+
 # ela — Greek accents, typed for you
 
 **ela** is a tiny macOS menu-bar app that adds the stress mark (τόνος) to Greek
@@ -84,8 +88,7 @@ The menu-bar glyph is **ε** when idle and **έ** when active.
 
 ## How it works (short version)
 
-ela is a [PuntoSwitcher](https://en.wikipedia.org/wiki/PuntoSwitcher)-style
-helper, but instead of switching layouts it inserts accents.
+ela watches typing on the Greek layout and inserts accents on the fly.
 
 - A small **on-device model** (built from a public Greek text corpus) maps each
   unaccented word to its accented form. ~95% of words have exactly one answer —
